@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import NoteContainer from './NoteContainer';
+import Instructions from './Instructions';
 const API = 'http://localhost:3000/api/v1/notes'
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
       .then( notes => this.setState({ notes: notes }))
     }
     handleNoteClickForContent = (note) => {
-      console.log('super text', this.state.showEdit)
+      console.log('super test', this.state.showEdit)
     
       this.setState({ 
         showEdit: false,
@@ -62,6 +63,9 @@ class App extends Component {
         .then(note => {
           let updatedNotes = this.state.notes.map( n => n.id === note.id ? note : n)
           this.setState({ notes: updatedNotes })
+          this.setState({
+            showEdit: false
+          })
         })
     }
 
@@ -71,14 +75,14 @@ class App extends Component {
 
     handleDeleteClick = (selectedNote, e) => {
       e.preventDefault();
-        debugger
-        return fetch(`http://localhost:3000/api/v1/notes/${selectedNote.id}`,{
+        fetch(`http://localhost:3000/api/v1/notes/${selectedNote.id}`,{
           method: 'DELETE', 
-          body: JSON.stringify(selectedNote)
         }).then(res => res.json())
           .then(note => {
-          let updatedNotes = this.state.notes.map( n => n.id === note.id ? note : n)
-          this.setState({ notes: updatedNotes })
+            this.componentDidMount()
+            this.setState({
+              showEdit: false
+            })
         })
     }
   
@@ -93,7 +97,7 @@ class App extends Component {
       }
       this.postNewNote(API, defaultNewNote)
         .then( newNote => this.setState({
-          notes: [...this.state.notes, newNote]
+          notes: [newNote, ...this.state.notes]
         }))
     }
   

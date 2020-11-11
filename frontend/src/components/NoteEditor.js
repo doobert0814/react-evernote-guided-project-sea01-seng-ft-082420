@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Instructions from './Instructions';
 
 class NoteEditor extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class NoteEditor extends Component {
         className="button"
         type="submit"
         value="Save"
+        
         />
 
         <button type="button"

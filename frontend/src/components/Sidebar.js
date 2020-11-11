@@ -7,7 +7,7 @@ class Sidebar extends Component {
     return (
       <div className='master-detail-element sidebar'>
          <button 
-        onClick={(e) => this.props.createNote(this.state, e)}>
+        onClick={() => this.props.createNote()}>
         New
         </button>
         <Filter />
@@ -15,10 +15,10 @@ class Sidebar extends Component {
         thingToPassToNoteList={this.props.notesToPassToSidebarItem}
         handleNoteClickForContent={this.props.handleNoteClickForContent}
         />
-        <button 
+        {/* <button 
         onClick={(e) => this.props.createNote(this.state, e)}>
         New
-        </button>
+        </button> */}
       </div>
     );
   }
