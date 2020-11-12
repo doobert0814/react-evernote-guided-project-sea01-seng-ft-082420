@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import NoteContainer from './NoteContainer';
-import Instructions from './Instructions';
 const API = 'http://localhost:3000/api/v1/notes'
 
 class App extends Component {
@@ -22,7 +21,6 @@ class App extends Component {
       .then( notes => this.setState({ notes: notes }))
     }
     handleNoteClickForContent = (note) => {
-      console.log('super test', this.state.showEdit)
     
       this.setState({ 
         showEdit: false,
@@ -79,7 +77,9 @@ class App extends Component {
           method: 'DELETE', 
         }).then(res => res.json())
           .then(note => {
-            this.componentDidMount()
+            let updatedNotes = this.state.notes.filter( n => {
+              return n.id !== note.noteId})
+            this.setState({ notes: updatedNotes })
             this.setState({
               showEdit: false
             })
@@ -97,7 +97,7 @@ class App extends Component {
       }
       this.postNewNote(API, defaultNewNote)
         .then( newNote => this.setState({
-          notes: [newNote, ...this.state.notes]
+          notes: [...this.state.notes, newNote]
         }))
     }
   

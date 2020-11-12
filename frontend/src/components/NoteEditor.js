@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Instructions from './Instructions';
 
 class NoteEditor extends Component {
   constructor(props) {

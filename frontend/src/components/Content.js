@@ -23,6 +23,7 @@ class Content extends Component {
       return <NoteViewer
       note={this.props.selectedNotePassingToContent}
       handleEditClick={this.props.handleEditClick}
+      handleDeleteClick={this.props.handleDeleteClick}
       />;
     } else {
       return <Instructions />;
